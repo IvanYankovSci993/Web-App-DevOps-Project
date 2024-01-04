@@ -16,5 +16,5 @@ steps:
     containerRegistry: 'docker_hub_iy'
     repository: 'ivanyankov993/iy-app'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/dockerfile'
     tags: 'latest'
