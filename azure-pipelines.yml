@@ -13,8 +13,8 @@ pool:
 steps:
 - task: Docker@2
   inputs:
-    containerRegistry: 'Docker Hub'
-    repository: 'ivanyanko993/iy-app'
+    containerRegistry: 'docker_hub_iy'
+    repository: 'ivanyankov993'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
