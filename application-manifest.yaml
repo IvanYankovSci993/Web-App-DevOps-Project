@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+spec:
+  replicas: 2 #Specify that the application should concurrently run on two replicas within the AKS cluster, allowing for scalability and high availability 
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app-container
+        image: ivanyankov993/iy-app:latest
+        ports:
+        - containerPort: 5000
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  selector:
+    app:  flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: ClusterIP
+
+#k... getpods (errors)
+#kubectl describe pod flask-app-deployment-74764c5578-6kubectl delete deployment
+  #https://dev.to/karnatisrinivas/errimagepull-and-imagepullbackoff-in-kubernetes-47oa
