@@ -25,6 +25,6 @@ steps:
     action: 'deploy'
     connectionType: 'azureResourceManager'
     azureSubscriptionConnection: 'Ivan Yankov DevOps(4f7ea576-9796-4381-8a3d-c19faee37af0)'
-    azureResourceGroup: 'aks-rg'
-    kubernetesCluster: 'aks-iy'
+    azureResourceGroup: 'networking-rg'
+    kubernetesCluster: 'terraform-aks-cluster'
     manifests: '**/application-manifest.yaml'
