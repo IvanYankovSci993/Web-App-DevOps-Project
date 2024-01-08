@@ -13,8 +13,8 @@ from azure.keyvault.secrets import SecretClient
 key_vault_url = "https://aks-project-iy-key-vault.vault.azure.net/"
 
 # Set up Azure Key Vault client with Managed Identity
-# credential = ManagedIdentityCredential()
-# secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
+credential = ManagedIdentityCredential()
+secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
 
 # Access the secret values from Key Vault
 # database_secret = secret_client.get_secret("database-name-py")
