@@ -1,0 +1,3 @@
+Thoroughly document the process of provisioning an AKS cluster using Infrastructure as Code (IaC) by updating the README file on your project repository. Outline the steps taken to define the cluster, and document the input and output variables used in this module.
+
+Additionally, don't forget to push the latest IaC code to GitHub.
