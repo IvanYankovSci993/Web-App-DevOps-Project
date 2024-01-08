@@ -13,20 +13,21 @@ from azure.keyvault.secrets import SecretClient
 key_vault_url = "https://aks-project-iy-key-vault.vault.azure.net/"
 
 # Set up Azure Key Vault client with Managed Identity
-credential = ManagedIdentityCredential()
+credential = ManagedIdentityCredential(client_id="a663f6cd-43fb-4125-b74a-d593b035dcf7",)
+#"<client_id>",)
 secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
 
 # Access the secret values from Key Vault
-database_secret = secret_client.get_secret("database-name-py")
+# database_secret = secret_client.get_secret("database-name-py")
 # name_secret = secret_client.get_secret("Server-name-py")
 # password_secret = secret_client.get_secret("server-password-py")
-# username_secret = secret_client.get_secret("server-username-py")
+username_secret = secret_client.get_secret("server-username-py")
 
 # Access the secret values
-database_value = database_secret.value
+# database_value = database_secret.value
 # name_value = name_secret.value
 # password_value = password_secret.value
-# username_value = username_secret.value
+username_value = username_secret.value
 
 # Your application code can now use the retrieved secrets securely
 
@@ -35,14 +36,14 @@ app = Flask(__name__)
 
 # database connection 
 # server = name_value
-database = database_value
-# username = username_value
+# database = database_value
+username = username_value
 # password = password_value
 # driver = '{ODBC Driver 18 for SQL Server}'
 
 server = 'devops-project-server.database.windows.net'
-# database = 'orders-db'
-username = 'maya'
+database = 'orders-db'
+# username = 'maya'
 password = 'AiCore1237'
 driver = '{ODBC Driver 18 for SQL Server}'
 
