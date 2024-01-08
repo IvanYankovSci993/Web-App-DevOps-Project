@@ -53,6 +53,120 @@ To run the application, you simply need to run the `app.py` script in this repos
 
 - **Database:** The application employs an Azure SQL Database as its database system to store order-related data.
 
+## Docker containerization
+
+1. Details about building the application's Dockerfile - dockerfile.
+  1.1 Base image is build on **python:3.8-slim**
+  1.2 The working directory is set to **/app**
+  1.3 Files are coppied from the current directory **..** or **/app**
+  1.4 Installation runs completed in the listed order:
+   - System dependencies
+   - ODBC driver
+   - pip
+   - setuptools
+   - python packages (based on requirements.txt)
+  1.5 Access to application granted by exposing port 5000
+  1.6 Startup command [python] [CMD]
+#### Local environemnt
+- flask (version 2.2.2)
+- pyodbc (version 4.0.39)
+- SQLAlchemy (version 2.0.21)
+- werkzeug (version 2.2.3)
+
+#### Azure Kubernetes Cluster (active)
+- flask (version 2.2.2)
+- pyodbc (version 4.0.39)
+- SQLAlchemy (version 2.0.21)
+- werkzeug (version 2.2.3)
+- azure-identity (version 1.15.0)
+- azure-keyvault-secrets (version 4.7.0) 
+
+2. Docker commands used throughout the project, including building the Docker image, running containers, tagging, and pushing to Docker Hub. Provide examples and explanations for each command.
+   docker build -t ivanyankov993/iy-app:latest
+   docker tag <name of the image> <docker-hub-username>/<image-name>:<tag>
+   docker push
+   docker pull
+   
+   docker run -p 5000:5000 ivanyankov993/iy-app:latest
+   http://127.0.0.1:5000
+
+3. Image information
+ivanyankov993/iy-app:latest
+- dockerhub    -> ivanyankov993
+- Image name   -> iy-app
+- Tags         -> latest # include tag for operating in local environment.
+- image currently setup for operations on Azure Kubernetes Server (AKS) with Azure Key Vault and Azure Secrets Management.
+
+## Infrastructure as Code (IaC)
+### Steps taken to define the networking resources
+
+0   Create a service principal, defined the azure provider and set remote state file management.
+1   Created a directory tree of root and two dir (networking-module and aks-cluster-module)
+1.1 Each Dir contain a variabls.tf outputs.tf main.tf 
+1.2 Root contains main.tf
+
+root/
+│
+└── main.tf
+│
+└── networking-module/
+│   │   main.tf
+│   │   variables.tf
+│   │   outputs.tf
+│
+└── aks-cluster-module/
+    │   main.tf
+    │   variables.tf
+    │   outputs.tf
+
+### Rresource created, their purpose, and any dependencies. 
+### root
+main.tf 
+  - provide service principal, the azure provider and instructions for remote state file management. 
+  - depends on contents in networking-module and aks-cluster-module
+### networking-module
+main.tf
+  - creates azurerm: 
+      - resource group (example)
+      - VNet (example)
+      - two subnets (control_plane_subnet and worker_node_subnet)
+      - network security group (example) with two inbond rules
+          - Inbond rule for kube-apiserver
+          - Inbond rule for SSH traffic
+variables.tf
+  - resource_group_name
+  - location
+  - vnet_address_space
+outputs.tf
+  - vnet_id
+  - control_plane_subnet_id
+  - worker_node-subnet_id
+  - resource_group_name
+  - aks_nsg_id
+
+### aks-cluster-module
+main.tf
+  - creates azurerm: 
+      - kubernetes_cluster (aks_cluster)
+        - default_node_pool
+        - service_principal
+variables.tf
+  - cluster_location
+  - dns_prefix
+  - kubernetes_version
+  - service_principal_client_id
+  - service_principal_client_secret
+  - and the 5 outputs produce from the networking-module/output.tf 
+outputs.tf
+  - aks_cluster_name
+  - aks_cluster_id
+  - aks_kubeconfig
+
+Accessing the cluster
+az aks get-credentials --resource-group networking-rg --name terraform-aks-cluster
+
+### Module
+
 ## Contributors 
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
