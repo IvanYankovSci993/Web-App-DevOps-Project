@@ -23,16 +23,16 @@ secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
 # password_secret = secret_client.get_secret("server-password-py")
 # username_secret = secret_client.get_secret("server-username-py")
 
-# database_secret = secret_client.get_secret("database")
-# name_secret = secret_client.get_secret("server")
-# password_secret = secret_client.get_secret("password")
+database_secret = secret_client.get_secret("database")
+name_secret = secret_client.get_secret("server")
+password_secret = secret_client.get_secret("password")
 username_secret = secret_client.get_secret("username")
 
 
 # Access the secret values
-# database_value = database_secret.value
-# name_value = name_secret.value
-# password_value = password_secret.value
+database_value = database_secret.value
+name_value = name_secret.value
+password_value = password_secret.value
 username_value = username_secret.value
 
 # Your application code can now use the retrieved secrets securely
@@ -41,16 +41,16 @@ username_value = username_secret.value
 app = Flask(__name__)
 
 # database connection 
-# server = name_value
-# database = database_value
+server = name_value
+database = database_value
 username = username_value
-# password = password_value
+password = password_value
 # driver = '{ODBC Driver 18 for SQL Server}'
 
-server = 'devops-project-server.database.windows.net'
-database = 'orders-db'
+# server = 'devops-project-server.database.windows.net'
+# database = 'orders-db'
 # username = 'maya'
-password = 'AiCore1237'
+# password = 'AiCore1237'
 driver = '{ODBC Driver 18 for SQL Server}'
 
 # Create the connection string
