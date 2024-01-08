@@ -18,7 +18,7 @@ secret_client = SecretClient(vault_url=key_vault_url, credential=credential)
 
 # Access the secret values from Key Vault
 database_secret = secret_client.get_secret("database-name-py")
-# name_secret = secret_client.get_secret("Server-name-py")
+name_secret = secret_client.get_secret("Server-name-py")
 # password_secret = secret_client.get_secret("server-password-py")
 # username_secret = secret_client.get_secret("server-username-py")
 
