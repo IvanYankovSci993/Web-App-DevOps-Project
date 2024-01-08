@@ -6,8 +6,8 @@ from sqlalchemy import create_engine
 import pyodbc
 import os
 
-# from azure.identity import ManagedIdentityCredential
-# from azure.keyvault.secrets import SecretClient
+from azure.identity import ManagedIdentityCredential
+from azure.keyvault.secrets import SecretClient
 
 # Replace these values with your Key Vault details
 key_vault_url = "https://aks-project-iy-key-vault.vault.azure.net/"
