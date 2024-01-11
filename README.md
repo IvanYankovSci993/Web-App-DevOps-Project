@@ -312,6 +312,9 @@ requirements:
 - azure-keyvault-secrets (version 4.7.0)
 - key_vault_url  (https://aks-iy.vault.azure.net/)
 - client_id (48ac02e0-f6eb-4f53-91b3-d6614d9d581c)
+  
+## Architercture overview:
+![DevOps Pipeline Architecture(1)](https://github.com/IvanYankovSci993/Web-App-DevOps-Project/assets/148336174/a2e5ad41-9683-4b2a-90a7-55005cd4f7f5)
 
 
 
