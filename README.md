@@ -322,7 +322,7 @@ requirements:
 ## Contributors 
 
 - [Maya Iuga]([https://github.com/yourusername](https://github.com/maya-a-iuga))
-
+- [Ivan Yankov](https://github.com/IvanYankovSci993)
 ## License
 
 This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
